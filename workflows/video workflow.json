@@ -1,0 +1,1099 @@
+{
+  "id": "d287f461-4fa6-4d7b-bb26-95a839e18d2b",
+  "revision": 0,
+  "last_node_id": 24,
+  "last_link_id": 25,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "KSamplerAdvanced",
+      "pos": [
+        466.9795041926396,
+        136.65049030938783
+      ],
+      "size": [
+        270,
+        334
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 5
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerAdvanced"
+      },
+      "widgets_values": [
+        "enable",
+        854779738543338,
+        "randomize",
+        4,
+        1,
+        "euler",
+        "simple",
+        0,
+        2,
+        "enable"
+      ],
+      "widgets_values_named": {
+        "add_noise": "enable",
+        "noise_seed": 854779738543338,
+        "control_after_generate": "randomize",
+        "steps": 4,
+        "cfg": 1,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "start_at_step": 0,
+        "end_at_step": 2,
+        "return_with_leftover_noise": "enable"
+      }
+    },
+    {
+      "id": 5,
+      "type": "UNETLoader",
+      "pos": [
+        -479.82505736850754,
+        120.5942332593267
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "wan2.1_t2v_14B_fp16.safetensors",
+        "fp8_e4m3fn_fast"
+      ],
+      "widgets_values_named": {
+        "unet_name": "wan2.1_t2v_14B_fp16.safetensors",
+        "weight_dtype": "fp8_e4m3fn_fast"
+      }
+    },
+    {
+      "id": 6,
+      "type": "CLIPLoader",
+      "pos": [
+        -476.33984187947726,
+        437.24119344606373
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            6,
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "wan",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "type": "wan",
+        "device": "default"
+      }
+    },
+    {
+      "id": 7,
+      "type": "VAELoader",
+      "pos": [
+        -474.5660501886448,
+        627.4408047136537
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "wan_alpha_2.1_vae_rgb_channel.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "wan_alpha_2.1_vae_rgb_channel.safetensors"
+      }
+    },
+    {
+      "id": 8,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -137.30825097703757,
+        136.58512078179976
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Wan2.2-Lightning_T2V-A14B-4steps-lora_HIGH_fp16.safetensors",
+        1
+      ],
+      "widgets_values_named": {
+        "lora_name": "Wan2.2-Lightning_T2V-A14B-4steps-lora_HIGH_fp16.safetensors",
+        "strength_model": 1
+      }
+    },
+    {
+      "id": 9,
+      "type": "ModelSamplingSD3",
+      "pos": [
+        159.5451315913216,
+        140.6184664238898
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingSD3"
+      },
+      "widgets_values": [
+        8
+      ],
+      "widgets_values_named": {
+        "shift": 8
+      }
+    },
+    {
+      "id": 10,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -83.58557626121734,
+        431.95106035348556
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            4,
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "AA cinematic luxury perfume commercial featuring a beautiful young adult woman with delicate features and long flowing brown hair, wearing an elegant cream-colored silk dress. She is standing in a sophisticated sunlit bedroom with warm golden afternoon sunlight streaming through sheer curtains.\n\nShe gently picks up a small elegant transparent glass perfume bottle filled with amber golden fragrance, featuring a refined gold cap. She slowly raises the perfume bottle toward her neck and gently sprays the fragrance once. A fine delicate mist catches the warm sunlight, creating a magical sparkling effect.\n\nHer movements are graceful, natural and gentle. She softly closes her eyes and enjoys the fragrance with a subtle peaceful smile. The camera slowly moves closer, capturing the elegant perfume bottle, realistic glass reflections and delicate facial expressions.\n\nWarm cinematic lighting, soft golden highlights, luxurious atmosphere, premium fragrance advertising campaign, photorealistic, sophisticated fashion cinematography, natural human movement, realistic hands, shallow depth of field, beautiful composition, smooth cinematic motion."
+      ],
+      "widgets_values_named": {
+        "text": "AA cinematic luxury perfume commercial featuring a beautiful young adult woman with delicate features and long flowing brown hair, wearing an elegant cream-colored silk dress. She is standing in a sophisticated sunlit bedroom with warm golden afternoon sunlight streaming through sheer curtains.\n\nShe gently picks up a small elegant transparent glass perfume bottle filled with amber golden fragrance, featuring a refined gold cap. She slowly raises the perfume bottle toward her neck and gently sprays the fragrance once. A fine delicate mist catches the warm sunlight, creating a magical sparkling effect.\n\nHer movements are graceful, natural and gentle. She softly closes her eyes and enjoys the fragrance with a subtle peaceful smile. The camera slowly moves closer, capturing the elegant perfume bottle, realistic glass reflections and delicate facial expressions.\n\nWarm cinematic lighting, soft golden highlights, luxurious atmosphere, premium fragrance advertising campaign, photorealistic, sophisticated fashion cinematography, natural human movement, realistic hands, shallow depth of field, beautiful composition, smooth cinematic motion."
+      }
+    },
+    {
+      "id": 11,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -80.4746862678702,
+        683.8317807684942
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            5,
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "low quality, blurry, distorted face, asymmetrical eyes, deformed hands, extra fingers, missing fingers, fused fingers, extra arms, extra limbs, unnatural body proportions, distorted perfume bottle, changing bottle shape, duplicated bottle, floating objects, unnatural spraying motion, excessive perfume mist, flickering, jitter, sudden movement, camera shake, inconsistent appearance, cartoon, anime, illustration, plastic skin, unnatural facial expression, text, subtitles, watermark, logo."
+      ],
+      "widgets_values_named": {
+        "text": "low quality, blurry, distorted face, asymmetrical eyes, deformed hands, extra fingers, missing fingers, fused fingers, extra arms, extra limbs, unnatural body proportions, distorted perfume bottle, changing bottle shape, duplicated bottle, floating objects, unnatural spraying motion, excessive perfume mist, flickering, jitter, sudden movement, camera shake, inconsistent appearance, cartoon, anime, illustration, plastic skin, unnatural facial expression, text, subtitles, watermark, logo."
+      }
+    },
+    {
+      "id": 14,
+      "type": "EmptyMochiLatentVideo",
+      "pos": [
+        -475.38808996408574,
+        746.0197244769961
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyMochiLatentVideo"
+      },
+      "widgets_values": [
+        1024,
+        640,
+        73,
+        1
+      ],
+      "widgets_values_named": {
+        "width": 1024,
+        "height": 640,
+        "length": 73,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 15,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -137.46844867381492,
+        279.11358677514704
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Wan2.2-Lightning_T2V-A14B-4steps-lora_LOW_fp16.safetensors",
+        1
+      ],
+      "widgets_values_named": {
+        "lora_name": "Wan2.2-Lightning_T2V-A14B-4steps-lora_LOW_fp16.safetensors",
+        "strength_model": 1
+      }
+    },
+    {
+      "id": 16,
+      "type": "ModelSamplingSD3",
+      "pos": [
+        160.56601060371167,
+        300.86248835348573
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingSD3"
+      },
+      "widgets_values": [
+        8
+      ],
+      "widgets_values_named": {
+        "shift": 8
+      }
+    },
+    {
+      "id": 17,
+      "type": "KSamplerAdvanced",
+      "pos": [
+        467.5849109294984,
+        708.6069294718021
+      ],
+      "size": [
+        270,
+        334
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 12
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 20
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 21
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerAdvanced"
+      },
+      "widgets_values": [
+        "disable",
+        221866596941605,
+        "randomize",
+        4,
+        1,
+        "euler",
+        "simple",
+        2,
+        10000,
+        "disable"
+      ],
+      "widgets_values_named": {
+        "add_noise": "disable",
+        "noise_seed": 221866596941605,
+        "control_after_generate": "randomize",
+        "steps": 4,
+        "cfg": 1,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "start_at_step": 2,
+        "end_at_step": 10000,
+        "return_with_leftover_noise": "disable"
+      }
+    },
+    {
+      "id": 18,
+      "type": "UNETLoader",
+      "pos": [
+        -478.9607321780355,
+        280.29146293659096
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "wan2.1_t2v_14B_bf16.safetensors",
+        "fp8_e4m3fn_fast"
+      ],
+      "widgets_values_named": {
+        "unet_name": "wan2.1_t2v_14B_bf16.safetensors",
+        "weight_dtype": "fp8_e4m3fn_fast"
+      }
+    },
+    {
+      "id": 20,
+      "type": "VAEDecode",
+      "pos": [
+        808.4165902960939,
+        139.03900821388316
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 18
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            22,
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 21,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        806.473844610669,
+        242.9705147955479
+      ],
+      "size": [
+        249.28749999999988,
+        334
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 22
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "5ca8c5154b8036ec4d8b4be2e4c68d98d5a9b73e3bd248faecc286bf996306b5.mp4",
+            "format": "video/h264-mp4",
+            "frame_rate": 8,
+            "fullpath": "",
+            "id": "9be2a2f1-8c5a-46f1-98fc-215300965741",
+            "metadata": {
+              "duration": 6.125,
+              "fps": 8,
+              "frame_count": 49,
+              "height": 640,
+              "kind": "video",
+              "width": 1024
+            },
+            "subfolder": "",
+            "type": "output",
+            "workflow": "AnimateDiff_00001.png"
+          }
+        }
+      },
+      "widgets_values_named": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "5ca8c5154b8036ec4d8b4be2e4c68d98d5a9b73e3bd248faecc286bf996306b5.mp4",
+            "format": "video/h264-mp4",
+            "frame_rate": 8,
+            "fullpath": "",
+            "id": "9be2a2f1-8c5a-46f1-98fc-215300965741",
+            "metadata": {
+              "duration": 6.125,
+              "fps": 8,
+              "frame_count": 49,
+              "height": 640,
+              "kind": "video",
+              "width": 1024
+            },
+            "subfolder": "",
+            "type": "output",
+            "workflow": "AnimateDiff_00001.png"
+          }
+        }
+      }
+    },
+    {
+      "id": 22,
+      "type": "RIFE VFI",
+      "pos": [
+        1079.6136762885853,
+        140.22000382742362
+      ],
+      "size": [
+        362.91953125,
+        270
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "frames",
+          "type": "IMAGE",
+          "link": 23
+        },
+        {
+          "name": "optional_interpolation_states",
+          "shape": 7,
+          "type": "INTERPOLATION_STATES",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RIFE VFI"
+      },
+      "widgets_values": [
+        "rife49.pth",
+        10,
+        2,
+        true,
+        true,
+        1,
+        "float32",
+        false,
+        1
+      ],
+      "widgets_values_named": {
+        "ckpt_name": "rife49.pth",
+        "clear_cache_after_n_frames": 10,
+        "multiplier": 2,
+        "fast_mode": true,
+        "ensemble": true,
+        "scale_factor": 1,
+        "dtype": "float32",
+        "torch_compile": false,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 24,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1480.8481013198355,
+        141.40110756846673
+      ],
+      "size": [
+        226.5576171875,
+        334
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 25
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 16,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "c7fcc01bc5b1463cdb58bbfa5b360a0632d8734374e5a99e562e2133415a8e6b.mp4",
+            "format": "video/h264-mp4",
+            "frame_rate": 16,
+            "fullpath": "",
+            "id": "10bf8dfb-6267-42a5-ab46-4fb4f12e995b",
+            "metadata": {
+              "duration": 6.0625,
+              "fps": 16,
+              "frame_count": 97,
+              "height": 640,
+              "kind": "video",
+              "width": 1024
+            },
+            "subfolder": "",
+            "type": "output",
+            "workflow": "AnimateDiff_00002.png"
+          }
+        }
+      },
+      "widgets_values_named": {
+        "frame_rate": 16,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "c7fcc01bc5b1463cdb58bbfa5b360a0632d8734374e5a99e562e2133415a8e6b.mp4",
+            "format": "video/h264-mp4",
+            "frame_rate": 16,
+            "fullpath": "",
+            "id": "10bf8dfb-6267-42a5-ab46-4fb4f12e995b",
+            "metadata": {
+              "duration": 6.0625,
+              "fps": 16,
+              "frame_count": 97,
+              "height": 640,
+              "kind": "video",
+              "width": 1024
+            },
+            "subfolder": "",
+            "type": "output",
+            "workflow": "AnimateDiff_00002.png"
+          }
+        }
+      }
+    }
+  ],
+  "links": [
+    [
+      1,
+      5,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      8,
+      0,
+      9,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      9,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      10,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      5,
+      11,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      6,
+      6,
+      0,
+      10,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      6,
+      0,
+      11,
+      0,
+      "CLIP"
+    ],
+    [
+      10,
+      14,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      11,
+      15,
+      0,
+      16,
+      0,
+      "MODEL"
+    ],
+    [
+      12,
+      16,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      15,
+      18,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      17,
+      3,
+      0,
+      17,
+      3,
+      "LATENT"
+    ],
+    [
+      18,
+      17,
+      0,
+      20,
+      0,
+      "LATENT"
+    ],
+    [
+      19,
+      7,
+      0,
+      20,
+      1,
+      "VAE"
+    ],
+    [
+      20,
+      10,
+      0,
+      17,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      21,
+      11,
+      0,
+      17,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      22,
+      20,
+      0,
+      21,
+      0,
+      "IMAGE"
+    ],
+    [
+      23,
+      20,
+      0,
+      22,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      22,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5131581182307067,
+      "offset": [
+        685.3504643747796,
+        751.3006113525423
+      ]
+    },
+    "frontendVersion": "1.59.5",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

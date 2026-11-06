@@ -1,0 +1,3 @@
+正面文本：Premium luxury perfume bottle product photography, transparent glass bottle filled with amber fragrance, elegant golden cap, placed on a black marble pedestal, soft golden light illuminating the glass, dramatic cinematic shadows, subtle reflections, luxury fashion advertising campaign, photorealistic, professional studio photography, highly detailed, 85mm lens.
+负面文本：low quality, bad anatomy, extra digits, missing digits, extra limbs, missing limbs
+
