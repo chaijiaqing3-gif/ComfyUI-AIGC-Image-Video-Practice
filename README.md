@@ -67,7 +67,7 @@
 - 完成视频生成、预览及 MP4 文件导出。
 
 ## 4. 项目目录
-
+- 以上传文件为主，以下框架只作参考
 ```text
 ComfyUI-AIGC-Image-Video-Practice/
 ├── README.md
