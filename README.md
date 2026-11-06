@@ -74,11 +74,8 @@ ComfyUI-AIGC-Image-Video-Practice/
 ├── .gitignore
 ├── docs/
 │   ├── 实践报告.docx
-│   ├── 实践报告.pdf
-│   └── 环境配置与技术复盘.md
 ├── workflows/
 │   ├── image-generation.json
-│   └── wan2.1-t2v.json
 ├── prompts/
 │   ├── perfume-image-prompt.txt
 │   ├── perfume-video-prompt.txt
